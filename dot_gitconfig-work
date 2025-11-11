@@ -1,0 +1,6 @@
+[user]
+  email = trent.lloyd@canonical.com
+  signingkey = 065675CAD58987A8272AA41E0F77EAF45CD0A9F8
+
+[commit]
+  gpgsign = true

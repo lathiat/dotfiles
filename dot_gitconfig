@@ -1,0 +1,100 @@
+# https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+
+[user]
+  email = trent@lloyd.id.au
+  name = Trent Lloyd
+
+[includeIf "gitdir:~/src/canonical/"]
+  path = .gitconfig-work
+
+[includeIf "gitdir:~/src/charms/"]
+  path = .gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:*://github.com/canonical/**"]
+  path = .gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:*://github.com/openstack/**"]
+  path = .gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:*://opendev.org/**"]
+  path = .gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:*://git.launchpad.net/**"]
+  path = .gitconfig-work
+
+[pull]
+  ff = only
+
+[init]
+  defaultBranch = main
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[core]
+  abbrev = 12
+  checkStat = minimal
+  splitIndex = true
+  pager = less -F -X
+
+[pretty]
+  fixes = Fixes: %h (\"%s\")
+
+[diff]
+  tool = meld
+  algorithm = histogram
+
+[difftool]
+  prompt = false
+
+[difftool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
+
+[merge]
+  tool = meld
+  conflictstyle = zdiff3
+
+[mergetool]
+  prompt = false
+
+[mergetool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+
+[gitreview]
+  username = lathiat
+
+[checkout]
+  defaultRemote = origin
+  workers = 0
+
+[gitubuntu]
+  lpuser = lathiat
+
+[rerere]
+  enabled = true
+
+[sendemail]
+  smtpserver     = smtp.gmail.com
+  smtpuser       = trent.lloyd@canonical.com
+  smtpencryption = tls
+  smtpserverport = 587
+  smtpAuth       = OAUTHBEARER
+  tocmd          = "~/src/linux/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nol"
+  cccmd          = "~/src/linux/scripts/get_maintainer.pl --nogit --nogit-fallback --norolestats --nom"
+
+[url "git+ssh://git.launchpad.net/"]
+  insteadof = lp:
+
+[url "git+ssh://git@github.com"]
+  insteadOf = https://github.com
+
+[alias]
+  recent-branches = "!git for-each-ref --sort=committerdate refs/ --format='%(committerdate:iso8601) %(refname:short)'"
+
+[branch]
+  sort = -committerdate
