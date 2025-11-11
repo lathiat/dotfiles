@@ -1,0 +1,12 @@
+export PATH=~/.cargo/bin:~/.local/bin:~/go/bin:~/bin:$PATH
+
+export HISTSIZE=-1
+export HISTFILESIZE=-1
+export HISTFILE=$HOME/.bash_history_full
+
+export DEBUGINFOD_URLS="https://debuginfod.ubuntu.com"
+
+export DEBEMAIL=trent.lloyd@canonical.com
+export EDITOR=vim
+export QUILT_PATCHES=debian/patches
+export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
