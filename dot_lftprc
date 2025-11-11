@@ -1,0 +1,3 @@
+set mirror:use-pget-n 3
+set pget:default-n 8
+set mirror:parallel-transfer-count 3
