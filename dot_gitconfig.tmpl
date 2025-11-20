@@ -56,7 +56,13 @@
 
 [merge]
   tool = meld
+{{- if not (eq .chezmoi.os "linux") }}
   conflictstyle = zdiff3
+{{- else if eq .chezmoi.osRelease.name "ubuntu" }}
+{{-    if ge .chezmoi.osRelease.versionID "24.04" }}
+  conflictstyle = zdiff3
+{{-    end }}
+{{- end }}
 
 [mergetool]
   prompt = false
